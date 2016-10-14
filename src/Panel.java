@@ -103,7 +103,7 @@ public class Panel extends JPanel{
 					g.setColor(Color.CYAN);
 					g.drawString(String.valueOf(counter), x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 10, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 20);
 
-					
+
 				}
 			}
 		}	

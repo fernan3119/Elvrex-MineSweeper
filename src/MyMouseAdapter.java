@@ -149,7 +149,8 @@ public class MyMouseAdapter extends MouseAdapter {
 				// Paints grid as black when clicked on a mine.
 
 				if(Mines.CompareSelection(gridX, gridY)){
-
+						
+				
 					Color newColor = Color.BLACK;
 					Panel.colorArray[gridX][gridY] = newColor;
 					Panel.repaint();
@@ -157,8 +158,8 @@ public class MyMouseAdapter extends MouseAdapter {
 
 
 
-//					JOptionPane.showMessageDialog(null, "Oops, you touched a mine \n ********YOU LOSE********","GAME OVER", JOptionPane.INFORMATION_MESSAGE,point);
-//					System.exit(0);
+					JOptionPane.showMessageDialog(null, "Oops, you touched a mine \n ********YOU LOSE********","GAME OVER", JOptionPane.INFORMATION_MESSAGE,point);
+					System.exit(0);
 
 				}
 
