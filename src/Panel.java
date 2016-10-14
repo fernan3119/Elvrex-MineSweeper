@@ -4,27 +4,32 @@ import java.awt.Insets;
 import java.util.Random;
 import javax.swing.JPanel;
 
+import org.w3c.dom.css.Counter;
+
 public class Panel extends JPanel{
-	
+
 	static final long serialVersionUID = 1L;
 	private static final int GRID_X = 25;
 	private static final int GRID_Y = 25;
 	private static final int INNER_CELL_SIZE = 29;
 	private static final int TOTAL_COLUMNS = 9;
 	private static final int TOTAL_ROWS = 10;
+
 	public int x = -1;
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
-	
+
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int MinesAround[][] = new int[TOTAL_COLUMNS][TOTAL_ROWS];
+	public int counterTotal=0;
+
 	//static public MineCoordinates Mines;
-			
+
 	public Panel() {   // Contructor
-		
+		//System.out.println(counterTotal);
 		// Use randoms to prevent warnings.
-		
+
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	
 			throw new RuntimeException("INNER_CELL_SIZE must be positive!");
 		}
@@ -34,16 +39,19 @@ public class Panel extends JPanel{
 		if (TOTAL_ROWS + (new Random()).nextInt(1) < 3) {	
 			throw new RuntimeException("TOTAL_ROWS must be at least 3!");
 		}
-		
+
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {   // 9x9 Grid
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				colorArray[x][y] = Color.WHITE;
 				MinesAround[x][y] = 0;
-				}
+
 			}
-		
+
+
 		}
-	
+
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -56,6 +64,7 @@ public class Panel extends JPanel{
 		int width = x2 - x1;
 		int height = y2 - y1;
 
+
 		//Paint the background
 		g.setColor(Color.PINK);
 		g.fillRect(x1, y1, width + 1, height + 1);
@@ -67,70 +76,91 @@ public class Panel extends JPanel{
 		}
 		for (int x = 0; x <= TOTAL_COLUMNS; x++) {
 			g.drawLine(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y, x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS - 1)));
+
 		}
 
 		//Paint cell colors
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				if ( (y != TOTAL_ROWS - 1)) {
+
 					Color c = colorArray[x][y];
 					g.setColor(c);
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
-					
-					}
+
+
 				}
 			}
-		
-		//Show number of mines neaby.
+		}
+
+		//Show number of mines nearby.
+
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				if ( (MinesAround[x][y] != 0) && colorArray[x][y] != Color.BLACK) {
 					int counter = MinesAround[x][y];
+
 					g.setColor(Color.CYAN);
 					g.drawString(String.valueOf(counter), x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 10, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 20);
+
 					
-					}
 				}
 			}
-		
-		}
-	
-	public void revealAdjacent(int x, int y){
-		
-		if((x<0) || (y<0) || (x>=9) || (y>=9)){return;}
-		
-		if(MyMouseAdapter.Mines.CompareSelection(x,y)){return;}
-			
-			 if(MyMouseAdapter.Mines.MinesNearby(x, y)){
-         		
-         		// Count number of mines around click.
-         		 
-         		int counter = MyMouseAdapter.Mines.MinesNearbyCounter(x, y);
-         		 
-         		colorArray[x][y] = Color.GRAY;
-         		MinesAround[x][y] = counter;
-	            repaint();
-	            	
-	            return;}
-         		
+		}	
 
-		
+
+
+
+	}
+
+
+
+	public void revealAdjacent(int x, int y){
+
+		if((x<0) || (y<0) || (x>=9) || (y>=9)){return;}
+
+		if(MyMouseAdapter.Mines.CompareSelection(x,y)){return;}
+
+		if(MyMouseAdapter.Mines.MinesNearby(x, y)){
+
+			// Count number of mines around click.
+
+			int counter = MyMouseAdapter.Mines.MinesNearbyCounter(x, y);
+
+			colorArray[x][y] = Color.GRAY;
+			MinesAround[x][y] = counter;
+			counterTotal++;
+			repaint();
+			System.out.println(counterTotal+" con numero");
+
+
+
+			return;}
+
+
+
 		else {
-			
+
+
+
 			if(colorArray[x][y] == Color.GRAY){return;}
-			
+
 			colorArray[x][y] = Color.GRAY;
 			revealAdjacent(x-1, y);
 			revealAdjacent(x+1, y);
 			revealAdjacent(x, y-1);
 			revealAdjacent(x, y+1);
-			
+
+			counterTotal++;
+
+			System.out.println(counterTotal+" adyacentes");
+
 		}
-		
+
 	}
-	
+
 	// GETTERS
-	
+
 	public int getGridX(int x, int y) {
 		Insets myInsets = getInsets();
 		int x1 = myInsets.left;
@@ -156,7 +186,7 @@ public class Panel extends JPanel{
 		}
 		return x;
 	}
-	
+
 	public int getGridY(int x, int y) {
 		Insets myInsets = getInsets();
 		int x1 = myInsets.left;
@@ -182,5 +212,6 @@ public class Panel extends JPanel{
 		}
 		return y;
 	}
+
 
 }
