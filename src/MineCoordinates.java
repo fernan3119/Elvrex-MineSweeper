@@ -4,6 +4,7 @@ import java.util.Random;
 public class MineCoordinates {
 
 	private Coordinates[] MineCoordinates;
+	private Coordinates[] MineCoordinates2;
 
 
 	// Creates an objects array to place the mines coordinates.
@@ -17,6 +18,7 @@ public class MineCoordinates {
 	public MineCoordinates(int length){
 
 		MineCoordinates = new Coordinates[length];
+		MineCoordinates2 = new Coordinates[length];
 
 	} 
 
@@ -40,7 +42,28 @@ public class MineCoordinates {
 
 			MineCoordinates[i] = CreateCoordinates();
 		}
+		MineCoordinates2 = MineCoordinates.clone();
+
+
+
+
+		for (int i = 0; i < MineCoordinates.length; i++) {
+
+
+			for ( int j = 0; j < MineCoordinates2.length-1; j++) {
+
+				if (MineCoordinates[i]==(MineCoordinates2)[j+1]) {
+					MineCoordinates[i] = CreateCoordinates();
+
+				}
+			}
+
+		}
+
+
+
 	}
+
 
 	// Method created to compare two different coordinates.
 

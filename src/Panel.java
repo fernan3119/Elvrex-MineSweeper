@@ -131,6 +131,7 @@ public class Panel extends JPanel{
 			MinesAround[x][y] = counter;
 			counterTotal++;
 			repaint();
+		
 			System.out.println(counterTotal+" con numero");
 
 

@@ -108,7 +108,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			int gridY = Panel.getGridY(x, y);
 
 			if(gridX >= 0 && gridX <= 8 && gridY >= 0 && gridY <= 8){
-				if (Panel.counterTotal >= 80) {
+				if (Panel.counterTotal >= 74) {
 
 					ImageIcon point = new ImageIcon("Bienve.jpg");
 					JOptionPane.showMessageDialog(null, "YESSS, you never touched a mine \n *********YOU WIN********","GAME OVER", JOptionPane.INFORMATION_MESSAGE,point);
@@ -117,7 +117,7 @@ public class MyMouseAdapter extends MouseAdapter {
 
 				// Shows number of mines around the clicked grid. YELLOW ATM FOR TESTING.
 
-				if(Mines.MinesNearby(gridX, gridY)&& Panel.colorArray[gridX][gridY].equals(Color.GRAY)){
+				if(Mines.MinesNearby(gridX, gridY) && Panel.colorArray[gridX][gridY].equals(Color.GRAY) && !Panel.colorArray[gridX][gridY].equals(Color.BLACK)){
 
 					// Count number of mines around click.
 
@@ -131,6 +131,9 @@ public class MyMouseAdapter extends MouseAdapter {
 					Panel.repaint();
 					Panel.counterTotal++;
 
+
+
+
 					System.out.println(Panel.counterTotal+" if Mines nearby");
 
 
@@ -143,14 +146,15 @@ public class MyMouseAdapter extends MouseAdapter {
 
 					Panel.revealAdjacent(gridX, gridY);
 
+
 				}
 
 
 				// Paints grid as black when clicked on a mine.
 
 				if(Mines.CompareSelection(gridX, gridY)){
-						
-				
+
+
 					Color newColor = Color.BLACK;
 					Panel.colorArray[gridX][gridY] = newColor;
 					Panel.repaint();
@@ -200,8 +204,10 @@ public class MyMouseAdapter extends MouseAdapter {
 
 				if(Panel2.colorArray[gridX2][gridY2].equals(Color.WHITE)){
 
+
 					Panel2.colorArray[gridX2][gridY2] = Color.RED;
 					Panel2.repaint();
+
 
 				}
 
