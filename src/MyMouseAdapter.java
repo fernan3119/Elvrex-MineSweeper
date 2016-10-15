@@ -114,7 +114,7 @@ public class MyMouseAdapter extends MouseAdapter {
 					JOptionPane.showMessageDialog(null, "YESSS, you never touched a mine \n *********YOU WIN********","GAME OVER", JOptionPane.INFORMATION_MESSAGE,point);
 					System.exit(0);
 				}
-
+//
 				// Shows number of mines around the clicked grid. YELLOW ATM FOR TESTING.
 
 				if(Mines.MinesNearby(gridX, gridY) && Panel.colorArray[gridX][gridY].equals(Color.GRAY) && !Panel.colorArray[gridX][gridY].equals(Color.BLACK)){
