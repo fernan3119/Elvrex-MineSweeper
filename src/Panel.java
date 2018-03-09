@@ -119,30 +119,22 @@ public class Panel extends JPanel{
 
 		if((x<0) || (y<0) || (x>=9) || (y>=9)){return;}
 
-		if(MyMouseAdapter.Mines.CompareSelection(x,y)){return;}
+		if(MyMouseAdapter.Mines.CompareSelection(x,y))
+			return;
 
 		if(MyMouseAdapter.Mines.MinesNearby(x, y)){
-
 			// Count number of mines around click.
-
 			int counter = MyMouseAdapter.Mines.MinesNearbyCounter(x, y);
 
 			colorArray[x][y] = Color.GRAY;
 			MinesAround[x][y] = counter;
 			counterTotal++;
 			repaint();
-		
+
 			System.out.println(counterTotal+" con numero");
-
-
-
-			return;}
-
-
-
+			return;
+		}
 		else {
-
-
 
 			if(colorArray[x][y] == Color.GRAY){return;}
 
@@ -151,7 +143,6 @@ public class Panel extends JPanel{
 			revealAdjacent(x+1, y);
 			revealAdjacent(x, y-1);
 			revealAdjacent(x, y+1);
-
 			counterTotal++;
 
 			System.out.println(counterTotal+" adyacentes");
