@@ -9,6 +9,7 @@ public class Main {
 		myFrame.setLocation(400, 150);
 		myFrame.setSize(325, 350);
 		System.out.println(" ");
+		System.out.println(" ");
 
 		Panel Panel = new Panel();
 		myFrame.add(Panel);
