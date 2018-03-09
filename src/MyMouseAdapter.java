@@ -114,7 +114,7 @@ public class MyMouseAdapter extends MouseAdapter {
 					JOptionPane.showMessageDialog(null, "YESSS, you never touched a mine \n *********YOU WIN********","GAME OVER", JOptionPane.INFORMATION_MESSAGE,point);
 					System.exit(0);
 				}
-//
+				//
 				// Shows number of mines around the clicked grid. YELLOW ATM FOR TESTING.
 
 				if(Mines.MinesNearby(gridX, gridY) && Panel.colorArray[gridX][gridY].equals(Color.GRAY) && !Panel.colorArray[gridX][gridY].equals(Color.BLACK)){
@@ -203,20 +203,13 @@ public class MyMouseAdapter extends MouseAdapter {
 			if(gridX2 >= 0 && gridX2 <= 8 && gridY2 >= 0 && gridY2 <= 8) {
 
 				if(Panel2.colorArray[gridX2][gridY2].equals(Color.WHITE)){
-
-
 					Panel2.colorArray[gridX2][gridY2] = Color.RED;
 					Panel2.repaint();
-
-
 				}
 
 				else if(Panel2.colorArray[gridX2][gridY2].equals(Color.BLACK) || Panel2.colorArray[gridX2][gridY2].equals(Color.GRAY) || Panel2.colorArray[gridX2][gridY2].equals(Color.YELLOW)){
-
 					// Do nothing.
-
 				}
-
 				else {
 
 					Panel2.colorArray[gridX2][gridY2] = Color.WHITE;
